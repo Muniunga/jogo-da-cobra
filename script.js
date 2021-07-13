@@ -13,10 +13,31 @@ function criarBg() {
 }
 
 function criarCobrinha(params) {
-  for (i = 0; i < snake.length; i++) {
+  for (let i = 0; i < snake.length; i++) {
     context.fillStyle = "green";
     context.fillRect(snake[i].x, snake[i].y, box, box);
   }
 }
 
-criarBg();
+function iniciarJogo() {
+  criarBg();
+  criarCobrinha();
+
+  let snakeX = snake[0].x;
+  let snakeY = snake[0].y;
+  let direction;
+  if (direction == "right") snakeX += box;
+  if (direction == "left") snakeX -= box;
+  if (direction == "up") snakeX -= box;
+  if (direction == "down") snakeX += box;
+
+  snake.pop();
+
+  let newHead = {
+    x: snakeX,
+    y: snakeY
+  };
+  snake.unshift(newHead);
+}
+
+let jogo = setInterval(iniciarJogo, 100);
